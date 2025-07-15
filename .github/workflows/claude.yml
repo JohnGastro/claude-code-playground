@@ -19,12 +19,12 @@ jobs:
       (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
     runs-on: ubuntu-latest
 
-    # 🔑 ここを拡張することでOIDCとGitHub APIの両方に必要な権限を渡す
+    # ✅ ClaudeがPRやIssueにコメントするために必要な権限を拡張
     permissions:
-      contents: write        # PRの内容をClaudeが読む＆書く
-      pull-requests: write   # PRレビュー投稿するために必要
-      issues: write          # issueコメント書くために必要
-      id-token: write        # OIDCトークンをClaudeが取得するために必要
+      contents: write        # PRの内容の読み書き
+      pull-requests: write   # PRレビュー投稿
+      issues: write          # issueコメント投稿
+      id-token: write        # OIDC認証で必要
       actions: read          # CI結果を読む用（オプション）
 
     steps:
@@ -37,29 +37,29 @@ jobs:
         id: claude
         uses: anthropics/claude-code-action@beta
         with:
-          # ✅ Claude OAuthトークン（`claude setup-token` で取得したsk-で始まるもの）
+          # ✅ Claude OAuthトークン（`claude setup-token` で取得した sk- から始まるやつ）
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
 
           # ✅ GitHub APIにアクセスするためのトークンを明示的に渡す
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
-          # これはオプション（必要なら）
+          # これはオプション（CI結果もClaudeに読ませたいなら必要）
           additional_permissions: |
             actions: read
 
-          # Optional: モデルをカスタマイズ
+          # Optional: モデルの指定（デフォルトはClaude Sonnet 4）
           # model: "claude-opus-4-20250514"
 
-          # Optional: トリガーフレーズを変更
+          # Optional: トリガーフレーズ変更
           # trigger_phrase: "/claude"
 
           # Optional: 指定ユーザーがアサインされたらトリガー
           # assignee_trigger: "claude-bot"
 
-          # Optional: 許可するツール
+          # Optional: 許可するコマンド
           # allowed_tools: "Bash(npm install),Bash(npm run build),Bash(npm run test:*),Bash(npm run lint:*)"
 
-          # Optional: プロジェクト固有の指示
+          # Optional: プロジェクト固有のカスタム指示
           # custom_instructions: |
           #   Follow our coding standards
           #   Ensure all new code has tests

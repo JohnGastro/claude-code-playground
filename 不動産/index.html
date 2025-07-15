@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>不動産情報 - 売り物件一覧</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1>🏠 不動産情報</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#properties">物件一覧</a></li>
+                <li><a href="#search">検索</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>理想の住まいを見つけよう</h2>
+                <p>厳選された売り物件を豊富に取り揃えております</p>
+                <button class="cta-button" onclick="scrollToProperties()">物件を見る</button>
+            </div>
+        </section>
+
+        <section id="search" class="search-section">
+            <div class="container">
+                <h3>物件検索</h3>
+                <div class="search-form">
+                    <input type="text" id="location" placeholder="エリア・駅名">
+                    <select id="price-range">
+                        <option value="">価格帯</option>
+                        <option value="0-3000">〜3,000万円</option>
+                        <option value="3000-5000">3,000万円〜5,000万円</option>
+                        <option value="5000-8000">5,000万円〜8,000万円</option>
+                        <option value="8000+">8,000万円〜</option>
+                    </select>
+                    <select id="room-type">
+                        <option value="">間取り</option>
+                        <option value="1R">1R</option>
+                        <option value="1K">1K</option>
+                        <option value="1DK">1DK</option>
+                        <option value="2LDK">2LDK</option>
+                        <option value="3LDK">3LDK</option>
+                        <option value="4LDK+">4LDK以上</option>
+                    </select>
+                    <button onclick="searchProperties()">検索</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="properties" class="properties-section">
+            <div class="container">
+                <h3>おすすめ物件</h3>
+                <div class="properties-grid" id="properties-list">
+                    <!-- Properties will be loaded here by JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h3>お問い合わせ</h3>
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <h4>お気軽にご相談ください</h4>
+                        <p>📞 電話: 03-1234-5678</p>
+                        <p>📧 メール: info@realestate.co.jp</p>
+                        <p>🕒 営業時間: 平日 9:00-18:00</p>
+                    </div>
+                    <form class="contact-form">
+                        <input type="text" placeholder="お名前" required>
+                        <input type="email" placeholder="メールアドレス" required>
+                        <input type="tel" placeholder="電話番号">
+                        <textarea placeholder="お問い合わせ内容" rows="4" required></textarea>
+                        <button type="submit">送信</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 不動産情報. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
